@@ -1,46 +1,44 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import Input from "../presentational/Input";
+import ViewImagen from './ViewImagen'
 
 
 
 class ImagenApp extends Component {
-    constructor() {
-      super()
-      this.state = {
-      imagen : [],
-      error: false,
-    
-      }
-    }
-  
-   componentDidMount(){
-   let dataImagen = fetch('https://api.flickr.com/services/rest/?method=flickr.galleries.getPhotos&api_key=03ff720509cad0d3a5d787e545a66e5e&gallery_id=66911286-72157647277042064&format=json&nojsoncallback=1')
-    .then((response) => {
-        return response.json()
-      })
-      .then((error) => {
-        console.log(JSON.stringify(error))
-      })  
-    
-   
-    }
-  
-  
-    render() {
-     
-      return (
-        <div>
-       
-        </div>
-      );
+  constructor() {
+    super()
+    this.state = {
+      imagen: [], // Se inicia el estado  con arreglo vacio
+      page: 0, // Se inicia el estado en 0
+
     }
   }
-  
-  export default ImagenApp;
-  
 
 
-const wrapper = document.getElementById("create-article-form");
-wrapper ? ReactDOM.render(<ImagenApp/>, wrapper) : false;
-// export default FormContainer;
+  // Se obtiene información de Api cuando se monte el componente
+  componentDidMount() {
+    let onePages = this.state.page + 1;
+    let dataImagen = fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=03ff720509cad0d3a5d787e545a66e5e&tags=cats&page=${onePages}&per_page=15&format=json&nojsoncallback=1`)
+    .then(response => response.json()) // Obtenemos la información en formato Json
+    .then(responseImagen => {
+      this.setState({ // Realizamos el reset de estados
+        imagen: responseImagen.photos.photo, // Obtenemos la información solo de las fotos 
+        page: onePages, // Se obtiene la primera pagina
+      })
+    })
+}
+
+  render() {
+     console.log(this.state.imagen) 
+    return ( // Pasamos la información del arreglo con la información de las fotos
+      <div> 
+      <ViewImagen imagen ={this.state.imagen} />  
+    </div>
+    );
+  }
+}
+
+export default ImagenApp;
+
+const wrapper = document.getElementById("root");
+wrapper ? ReactDOM.render(<ImagenApp />, wrapper) : false;
