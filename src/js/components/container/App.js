@@ -19,7 +19,7 @@ class ImagenApp extends Component {
   // Se obtiene información de Api cuando se monte el componente
   componentDidMount() {
     let dataImagen = fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=03ff720509cad0d3a5d787e545a66e5e&tags=
-    landscapes&page=${this.state.page}&per_page=30&format=json&nojsoncallback=1`)
+    places&page=${this.state.page}&extras=description,date_upload,tags,date_taken,last_update,owner_name&per_page=30&format=json&nojsoncallback=1`)
       .then(response => response.json()) // Obtenemos la información en formato Json
       .then(responseImagen => {
         this.setState({ // Realizamos el reset de estados
@@ -32,7 +32,7 @@ class ImagenApp extends Component {
   getSearch = (e) => {
     e.preventDefault();
     let searchImagen = e.target.picture.value;
-    let dataSearch = fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=03ff720509cad0d3a5d787e545a66e5e&tags=${searchImagen}&page=${this.state.page}&per_page=100&format=json&nojsoncallback=1`)
+    let dataSearch = fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=03ff720509cad0d3a5d787e545a66e5e&tags=${searchImagen}&page=${this.state.page}&extras=description,date_upload,tags,date_taken,last_update,owner_name&per_page=100&format=json&nojsoncallback=1`)
       .then(response => response.json()) // Obtenemos la información en formato Json
       .then(responseSearch => {
         this.setState({ // Realizamos el reset de estados

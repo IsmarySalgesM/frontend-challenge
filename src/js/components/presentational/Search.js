@@ -6,7 +6,7 @@ const Search = (props) => {
     return (
         <form onSubmit={props.getSearch}>
           
-                <input text="text" name="picture" />
+          <input text="text" name="picture" />
             
             <button className="btnSearch">Buscar</button>
         </form>
