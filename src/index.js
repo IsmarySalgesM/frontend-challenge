@@ -1,1 +1,1 @@
- import ImagenApp from "./js/components/container/App" ;
+ import App from "./App" ;
