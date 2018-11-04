@@ -6,8 +6,8 @@
 
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
-    "build": "webpack",
-    "deploy":"gh-pages -d dist"
+    "build": "webpack --mode production",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/IsmarySalgesM/frontend-challenge/issues"
   },
-  "homepage": "https://github.com/IsmarySalgesM/frontend-challenge",
+  "homepage": "https://github.com/IsmarySalgesM/frontend-challenge#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
